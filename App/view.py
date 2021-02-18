@@ -38,8 +38,7 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Consultar los Top x de videos por likes")
-    print("3- Consultar los videos por canal")
+    print("2- Consultar los videos por canal")
     print("0- Salir")
 
 
@@ -67,16 +66,6 @@ def printAuthorData(author):
         print('No se encontro el canal deseado')
 
 
-def printBestVideos(books):
-    size = lt.size(books)
-    if size:
-        print(' Estos son los mejores videos: ')
-        for book in lt.iterator(books):
-            print('Titulo: ' + book['title'] + '  ISBN: ' +
-                  book['isbn'] + ' Rating: ' + book['average_rating'])
-    else:
-        print('No se encontraron videos')
-
 
 catalog = None
 
@@ -94,19 +83,9 @@ while True:
         print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
 
     elif int(inputs[0]) == 2:
-        number = input("Buscando los TOP ?: ")
-        books = controller.getBestBooks(catalog, int(number))
-        printBestVideos(books)
-
-    elif int(inputs[0]) == 3:
         authorname = input("Nombre del canal a buscar: ")
         author = controller.getVideosByChannel(catalog, authorname)
         printAuthorData(author)
-
-    elif int(inputs[0]) == 4:
-        label = input("Etiqueta a buscar: ")
-        book_count = controller.countBooksByTag(catalog, label)
-        print('Se encontraron: ', book_count, ' videos')
 
     else:
         sys.exit(0)
