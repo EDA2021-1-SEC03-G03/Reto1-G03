@@ -37,12 +37,92 @@ los mismos.
 
 # Construccion de modelos
 
+
+def newCatalog():
+    catalog = {'title': None,
+               'channel_title': None}
+
+    catalog['title'] = lt.newList()
+    catalog['channel_title'] = lt.newList('SINGLE_LINKED',
+                                          cmpfunction=compareauthors)
+
+    return catalog
+
+
+def addVideo(catalog, title):
+    # Se adiciona el libro a la lista de libros
+    lt.addLast(catalog['title'], title)
+    # Se obtienen los autores del libro
+    authors = title['channel_title'].split(",")
+    # Cada autor, se crea en la lista de libros del catalogo, y se
+    # crea un libro en la lista de dicho autor (apuntador al libro)
+    for channel in authors:
+        addTitleChannel(catalog, channel.strip(), title)
+
+
+def addTitleChannel(catalog, authorname, title):
+    """
+    Adiciona un autor a lista de autores, la cual guarda referencias
+    a los libros de dicho autor
+    """
+    authors = catalog['channel_title']
+    posauthor = lt.isPresent(authors, authorname)
+    if posauthor > 0:
+        author = lt.getElement(authors, posauthor)
+    else:
+        author = newAuthor(authorname)
+        lt.addLast(authors, author)
+    lt.addLast(author['title'], title)
+
+
 # Funciones para agregar informacion al catalogo
 
 # Funciones para creacion de datos
 
+
+def newAuthor(name):
+    """
+    Crea una nueva estructura para modelar los libros de
+    un autor y su promedio de ratings
+    """
+    author = {'name': "", "title": None}
+    author['name'] = name
+    author['title'] = lt.newList('ARRAY_LIST')
+    return author
+
 # Funciones de consulta
+
+
+def getVideosByChannel(catalog, authorname):
+    """
+    Retorna un autor con sus libros a partir del nombre del autor
+    """
+    posauthor = lt.isPresent(catalog['channel_title'], authorname)
+    if posauthor > 0:
+        author = lt.getElement(catalog['channel_title'], posauthor)
+        return author
+    return None
+
+
+def getBestVideos(catalog, number):
+    """
+    Retorna los mejores libros
+    """
+    videos = catalog['title']
+    bestvideos = lt.newList()
+    for cont in range(1, number+1):
+        video = lt.getElement(videos, cont)
+        lt.addLast(bestvideos, video)
+    return bestvideos
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
+
+def compareauthors(authorname1, author):
+    if (authorname1.lower() in author['name'].lower()):
+        return 0
+    return -1
+
+
 # Funciones de ordenamiento
+
