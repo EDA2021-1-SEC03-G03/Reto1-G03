@@ -38,9 +38,8 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Consultar los Top x libros por promedio")
-    print("3- Consultar los libros de un autor")
-    print("4- Libros por género")
+    print("2- Consultar los Top x de videos por likes")
+    print("3- Consultar los videos por canal")
     print("0- Salir")
 
 
@@ -61,10 +60,9 @@ def loadData(catalog):
 def printAuthorData(author):
     if author:
         print('Autor encontrado: ' + author['name'])
-        print('Promedio: ' + str(author['average_rating']))
-        print('Total de libros: ' + str(lt.size(author['books'])))
-        for book in lt.iterator(author['books']):
-            print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
+        print('Total de libros: ' + str(lt.size(author['title'])))
+        for book in lt.iterator(author['title']):
+            print('Titulo: ' + book['title'])
     else:
         print('No se encontro el autor')
 
@@ -102,7 +100,7 @@ while True:
 
     elif int(inputs[0]) == 3:
         authorname = input("Nombre del autor a buscar: ")
-        author = controller.getBooksByAuthor(catalog, authorname)
+        author = controller.getVideosByChannel(catalog, authorname)
         printAuthorData(author)
 
     elif int(inputs[0]) == 4:
