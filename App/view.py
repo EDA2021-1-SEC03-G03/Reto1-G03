@@ -59,23 +59,23 @@ def loadData(catalog):
 
 def printAuthorData(author):
     if author:
-        print('Autor encontrado: ' + author['name'])
-        print('Total de libros: ' + str(lt.size(author['title'])))
+        print('Canal encontrado: ' + author['name'])
+        print('Total de videos: ' + str(lt.size(author['title'])))
         for book in lt.iterator(author['title']):
             print('Titulo: ' + book['title'])
     else:
-        print('No se encontro el autor')
+        print('No se encontro el canal deseado')
 
 
-def printBestBooks(books):
+def printBestVideos(books):
     size = lt.size(books)
     if size:
-        print(' Estos son los mejores libros: ')
+        print(' Estos son los mejores videos: ')
         for book in lt.iterator(books):
             print('Titulo: ' + book['title'] + '  ISBN: ' +
                   book['isbn'] + ' Rating: ' + book['average_rating'])
     else:
-        print('No se encontraron libros')
+        print('No se encontraron videos')
 
 
 catalog = None
@@ -90,23 +90,23 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
-        print('titulos cargados: ' + str(lt.size(catalog['title'])))
+        print('Videos cargados: ' + str(lt.size(catalog['title'])))
         print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
 
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
         books = controller.getBestBooks(catalog, int(number))
-        printBestBooks(books)
+        printBestVideos(books)
 
     elif int(inputs[0]) == 3:
-        authorname = input("Nombre del autor a buscar: ")
+        authorname = input("Nombre del canal a buscar: ")
         author = controller.getVideosByChannel(catalog, authorname)
         printAuthorData(author)
 
     elif int(inputs[0]) == 4:
         label = input("Etiqueta a buscar: ")
         book_count = controller.countBooksByTag(catalog, label)
-        print('Se encontraron: ', book_count, ' Libros')
+        print('Se encontraron: ', book_count, ' videos')
 
     else:
         sys.exit(0)
