@@ -26,6 +26,7 @@
 
 
 import config as cf
+import time
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
@@ -43,7 +44,7 @@ def newCatalog():
                'channel_title': None}
 
     catalog['title'] = lt.newList()
-    catalog['channel_title'] = lt.newList('SINGLE_LINKED',
+    catalog['channel_title'] = lt.newList('ARRAY_LIST',
                                           cmpfunction=compareauthors)
 
     return catalog
@@ -124,5 +125,16 @@ def compareauthors(authorname1, author):
     return -1
 
 
-# Funciones de ordenamiento
+def cmpVideosByViews(video1, video2):
+    return (float(video1['views']) > float(video2['views']))
 
+
+# Funciones de ordenamiento
+def sortVideos(catalog, size):
+    sub_list = lt.subList(catalog['title'], 0, size)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    sorted_list = sa.sort(sub_list, cmpVideosByViews)
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list

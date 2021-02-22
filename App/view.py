@@ -56,15 +56,14 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-def printAuthorData(author):
+def printResults(author):
     if author:
         print('Canal encontrado: ' + author['name'])
         print('Total de videos: ' + str(lt.size(author['title'])))
         for book in lt.iterator(author['title']):
-            print('Titulo: ' + book['title'])
+            print('Titulo: ' + book['title'] + " views: " + book["views"])
     else:
         print('No se encontro el canal deseado')
-
 
 
 catalog = None
@@ -81,11 +80,10 @@ while True:
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['title'])))
         print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
-
     elif int(inputs[0]) == 2:
-        authorname = input("Nombre del canal a buscar: ")
-        author = controller.getVideosByChannel(catalog, authorname)
-        printAuthorData(author)
+        size = input("Indique el tamaño de la muestra: ")
+        result = controller.sortVideos(catalog, size)
+        printResults(result)
 
     else:
         sys.exit(0)
