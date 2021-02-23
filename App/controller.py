@@ -37,29 +37,23 @@ def initCatalog(tad):
     Llama la funcion de inicializacion del catalogo del modelo.
     """
     catalog = model.newCatalog(tad)
-    return catalog, tad
+    return catalog
 
 # Funciones para la carga de datos
 
 
-def loadData(catalog, tad):
+def loadData(catalog):
     """
-    Carga los datos de los archivos y cargar los datos en la
-    estructura de datos
+    Carga los archivos y los datos en la estructura de datos
     """
-    loadVideos(catalog, tad)
+    loadVideos(catalog)
 
 
-def loadVideos(catalog, tad):
-    """
-    Carga los libros del archivo.  Por cada libro se toman sus autores y por
-    cada uno de ellos, se crea en la lista de autores, a dicho autor y una
-    referencia al libro que se esta procesando.
-    """
+def loadVideos(catalog):
     videosfile = cf.data_dir + 'videos-large.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
     for video in input_file:
-        model.addVideo(catalog, video, tad)
+        model.addVideo(catalog, video)
 
 # Funciones de ordenamiento
 

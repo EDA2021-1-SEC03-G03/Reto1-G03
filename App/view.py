@@ -49,11 +49,11 @@ def initCatalog(tad):
     return controller.initCatalog(tad)
 
 
-def loadData(catalog, tad):
+def loadData(catalog):
     """
     Carga los libros en la estructura de datos
     """
-    controller.loadData(catalog, tad)
+    controller.loadData(catalog)
 
 
 def printResults(ord_books, sample):
@@ -70,7 +70,7 @@ def printResults(ord_books, sample):
 def pregunta1():
     print("Seleccione la estructura de datos")
     print("1- ARRAY_LIST")
-    print("2- SINGLE_LINKED")
+    print("2- LINKED_LIST")
 
 
 def pregunta2():
@@ -93,38 +93,32 @@ while True:
         pregunta1()
         tad = int(input())
         print("Cargando información de los archivos ....")
-        new_type = None
-        while new_type is None:
-            if tad == 1:
-                new_type = "ARRAY_LIST"
-            elif tad == 2:
-                new_type == "SINGLE_LINKED"
-            else:
-                print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
+        new_type = 0
+        if tad == 1:
+            new_type = "ARRAY_LIST"
+        elif tad == 2:
+            new_type == "LINKED_LIST"
+        else:
+            print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
         print(new_type)
         catalog = initCatalog(new_type)
-        loadData(catalog[0], catalog[1])
+        loadData(catalog)
 
-        print('Videos cargados: ' + str(lt.size(catalog[0]['title'])))
-
-        print('Nombres de canales cargados: ' +
-              str(lt.size(catalog[0]['channel_title'])))
+        print('Videos cargados: ' + str(lt.size(catalog['title'])))
 
     elif int(inputs[0]) == 2:
         size = int(input("Indique el tamaño de la muestra: "))
         pregunta2()
         iterable_ord = int(input())
-
-        new_order = None
-        while new_order is None:
-            if iterable_ord == 1:
-                new_order = "selectionsort"
-            elif iterable_ord == 2:
-                new_order = "insertionsort"
-            elif iterable_ord == 3:
-                new_order = "shellsort"
-            else:
-                print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
+        new_order = 0
+        if iterable_ord == 1:
+            new_order = "selectionsort"
+        elif iterable_ord == 2:
+            new_order = "insertionsort"
+        elif iterable_ord == 3:
+            new_order = "shellsort"
+        else:
+            print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
 
         result = controller.sortVideos(catalog, size, new_order)
         printResults(result[1], size)

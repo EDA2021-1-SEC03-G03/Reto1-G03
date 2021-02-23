@@ -33,12 +33,6 @@ from DISClib.Algorithms.Sorting import insertionsort as so
 from DISClib.Algorithms.Sorting import selectionsort as su
 assert cf
 
-"""
-Se define la estructura de un catálogo de videos. El catálogo tendrá dos 
-listas, una para los videos, otra para las categorias de
-los mismos.
-"""
-
 # Construccion de modelos
 
 
@@ -55,38 +49,12 @@ def newCatalog(tad):
 
 # Funciones para agregar informacion al catalogo
 
-def addVideo(catalog, title, tad):
+def addVideo(catalog, title):
     lt.addLast(catalog['title'], title)
-    channel_title = title['channel_title'].split(",")
-    for channel in channel_title:
-        addTitleChannel(catalog, channel.strip(), title, tad)
-
-
-def addTitleChannel(catalog, channel_title, title, tad):
-    channels = catalog['channel_title']
-    poschannel = lt.isPresent(channels, channel_title)
-    if poschannel > 0:
-        channel = lt.getElement(channels, poschannel)
-    else:
-        channel = newChannelTitle(channel_title, tad)
-        lt.addLast(channels, channel)
-    lt.addLast(channel['title'], title)
 
 # Funciones para creacion de datos
 
-
-def newChannelTitle(name, tad):
-    """
-    Crea una nueva estructura para modelar los libros de
-    un autor y su promedio de ratings
-    """
-    channel = {'name': "", "title": None, 'views': 0}
-    channel['name'] = name
-    channel['title'] = lt.newList(tad)
-    return channel
-
 # Funciones de consulta
-
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
@@ -104,7 +72,7 @@ def cmpVideosByViews(video1, video2):
 # Funciones de ordenamiento
 def sortVideos(catalog, size, iterable_ord):
     start_time = time.process_time()
-    sub_list = lt.subList(catalog[0]['title'], 0, size)
+    sub_list = lt.subList(catalog['title'], 0, size)
     if iterable_ord == "selectionsort":
         new_title = su.sort(sub_list, cmpVideosByViews)
     elif iterable_ord == "insertionsort":
