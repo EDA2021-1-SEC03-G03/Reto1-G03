@@ -46,7 +46,7 @@ def newCatalog(tad):
     catalog = {'title': None,
                'channel_title': None}
 
-    catalog['title'] = lt.newList()
+    catalog['title'] = lt.newList(tad)
     catalog['channel_title'] = lt.newList(tad,
                                           cmpfunction=compareChannelTitle)
 
@@ -63,17 +63,13 @@ def addVideo(catalog, title, tad):
 
 
 def addTitleChannel(catalog, channel_title, title, tad):
-    """
-    Adiciona un autor a lista de autores, la cual guarda referencias
-    a los libros de dicho autor
-    """
-    channles = catalog['channel_title']
-    poschannel = lt.isPresent(channles, channel_title)
+    channels = catalog['channel_title']
+    poschannel = lt.isPresent(channels, channel_title)
     if poschannel > 0:
-        channel = lt.getElement(channles, poschannel)
+        channel = lt.getElement(channels, poschannel)
     else:
         channel = newChannelTitle(channel_title, tad)
-        lt.addLast(channles, channel)
+        lt.addLast(channels, channel)
     lt.addLast(channel['title'], title)
 
 # Funciones para creacion de datos
