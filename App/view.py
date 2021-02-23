@@ -38,35 +38,50 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Consultar los videos por canal")
+    print("2- Ordenar los libros por views")
     print("0- Salir")
 
 
-def initCatalog():
+def initCatalog(tad):
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog()
+    return controller.initCatalog(tad)
 
 
-def loadData(catalog):
+def loadData(catalog, tad):
     """
     Carga los libros en la estructura de datos
     """
-    controller.loadData(catalog)
+    controller.loadData(catalog, tad)
 
 
-def printResults(author):
-    if author:
-        print('Canal encontrado: ' + author['name'])
-        print('Total de videos: ' + str(lt.size(author['title'])))
-        for book in lt.iterator(author['title']):
-            print('Titulo: ' + book['title'] + " views: " + book["views"])
-    else:
-        print('No se encontro el canal deseado')
+def printResults(ord_books, sample):
+    size = lt.size(ord_books)
+    if size == sample:
+        print("Los primeros ", str(sample), " libros ordenados son: ")
+        i = 1
+        while i <= sample:
+            book = lt.getElement(ord_books, i)
+            print('Titulo: ' + book['title'] + ' views: ' + book['views'])
+            i += 1
+
+
+def pregunta1():
+    print("Seleccione la estructura de datos")
+    print("1- ARRAY_LIST")
+    print("2- SINGLE_LINKED")
+
+
+def pregunta2():
+    print("Seleccione el metodo de ordenamiento")
+    print("1- Selection Sort")
+    print("2- Insertion Sort")
+    print("3- Shell Sort")
 
 
 catalog = None
+
 
 """
 Menu principal
@@ -75,15 +90,46 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        pregunta1()
+        tad = int(input())
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
-        loadData(catalog)
-        print('Videos cargados: ' + str(lt.size(catalog['title'])))
-        print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
+        new_type = None
+        while new_type is None:
+            if tad == 1:
+                new_type = "ARRAY_LIST"
+            elif tad == 2:
+                new_type == "SINGLE_LINKED"
+            else:
+                print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
+        print(new_type)
+        catalog = initCatalog(new_type)
+        loadData(catalog[0], catalog[1])
+
+        print('Videos cargados: ' + str(lt.size(catalog[0]['title'])))
+
+        print('Nombres de canales cargados: ' +
+              str(lt.size(catalog[0]['channel_title'])))
+
     elif int(inputs[0]) == 2:
-        size = input("Indique el tamaño de la muestra: ")
-        result = controller.sortVideos(catalog, size)
-        printResults(result)
+        size = int(input("Indique el tamaño de la muestra: "))
+        pregunta2()
+        iterable_ord = int(input())
+
+        new_order = None
+        while new_order is None:
+            if iterable_ord == 1:
+                new_order = "selectionsort"
+            elif iterable_ord == 2:
+                new_order = "insertionsort"
+            elif iterable_ord == 3:
+                new_order = "shellsort"
+            else:
+                print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
+
+        result = controller.sortVideos(catalog, size, new_order)
+        printResults(result[1], size)
+        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                                          str(result[0]))
 
     else:
         sys.exit(0)

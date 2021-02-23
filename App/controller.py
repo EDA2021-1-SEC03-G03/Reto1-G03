@@ -32,25 +32,25 @@ El controlador se encarga de mediar entre la vista y el modelo.
 # Inicialización del Catálogo de libros
 
 
-def initCatalog():
+def initCatalog(tad):
     """
     Llama la funcion de inicializacion del catalogo del modelo.
     """
-    catalog = model.newCatalog()
-    return catalog
+    catalog = model.newCatalog(tad)
+    return catalog, tad
 
 # Funciones para la carga de datos
 
 
-def loadData(catalog):
+def loadData(catalog, tad):
     """
     Carga los datos de los archivos y cargar los datos en la
     estructura de datos
     """
-    loadVideos(catalog)
+    loadVideos(catalog, tad)
 
 
-def loadVideos(catalog):
+def loadVideos(catalog, tad):
     """
     Carga los libros del archivo.  Por cada libro se toman sus autores y por
     cada uno de ellos, se crea en la lista de autores, a dicho autor y una
@@ -59,27 +59,12 @@ def loadVideos(catalog):
     booksfile = cf.data_dir + 'videos-small.csv'
     input_file = csv.DictReader(open(booksfile, encoding='utf-8'))
     for book in input_file:
-        model.addVideo(catalog, book)
+        model.addVideo(catalog, book, tad)
 
 # Funciones de ordenamiento
 
-def sortVideos(catalog, size):
-    return model.sortVideos(catalog, size)
+
+def sortVideos(catalog, size, iterable_ord):
+    return model.sortVideos(catalog, size, iterable_ord)
 
 # Funciones de consulta sobre el catálogo
-
-
-def getVideosByChannel(catalog, authorname):
-    """
-    Retrona los libros de un autor
-    """
-    author = model.getVideosByChannel(catalog, authorname)
-    return author
-
-
-def getBestVideos(catalog, number):
-    """
-    Retorna los mejores libros
-    """
-    bestvideos = model.getBestVideos(catalog, number)
-    return bestvideos
