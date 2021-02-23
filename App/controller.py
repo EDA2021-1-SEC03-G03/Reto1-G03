@@ -56,10 +56,10 @@ def loadVideos(catalog, tad):
     cada uno de ellos, se crea en la lista de autores, a dicho autor y una
     referencia al libro que se esta procesando.
     """
-    booksfile = cf.data_dir + 'videos-small.csv'
-    input_file = csv.DictReader(open(booksfile, encoding='utf-8'))
-    for book in input_file:
-        model.addVideo(catalog, book, tad)
+    videosfile = cf.data_dir + 'videos-large.csv'
+    input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
+    for video in input_file:
+        model.addVideo(catalog, video, tad)
 
 # Funciones de ordenamiento
 
