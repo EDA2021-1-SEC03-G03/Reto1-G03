@@ -28,9 +28,8 @@
 import config as cf
 import time
 from DISClib.ADT import list as lt
-from DISClib.Algorithms.Sorting import shellsort as sa
-from DISClib.Algorithms.Sorting import insertionsort as so
-from DISClib.Algorithms.Sorting import selectionsort as su
+from DISClib.Algorithms.Sorting import quicksort as qs
+from DISClib.Algorithms.Sorting import mergesort as ms
 assert cf
 
 # Construccion de modelos
@@ -73,12 +72,10 @@ def cmpVideosByViews(video1, video2):
 def sortVideos(catalog, size, iterable_ord):
     start_time = time.process_time()
     sub_list = lt.subList(catalog['title'], 0, size)
-    if iterable_ord == "selectionsort":
-        new_title = su.sort(sub_list, cmpVideosByViews)
-    elif iterable_ord == "insertionsort":
-        new_title = so.sort(sub_list, cmpVideosByViews)
-    elif iterable_ord == "shellsort":
-        new_title = sa.sort(sub_list, cmpVideosByViews)
+    if iterable_ord == "quicksort":
+        new_title = qs.sort(sub_list, cmpVideosByViews)
+    elif iterable_ord == "mergesort":
+        new_title = ms.sort(sub_list, cmpVideosByViews)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, new_title

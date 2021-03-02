@@ -75,9 +75,8 @@ def pregunta1():
 
 def pregunta2():
     print("Seleccione el metodo de ordenamiento")
-    print("1- Selection Sort")
-    print("2- Insertion Sort")
-    print("3- Shell Sort")
+    print("1- Quick Sort")
+    print("2- Merge Sort")
 
 
 catalog = None
@@ -112,11 +111,9 @@ while True:
         iterable_ord = int(input())
         new_order = 0
         if iterable_ord == 1:
-            new_order = "selectionsort"
+            new_order = "quicksort"
         elif iterable_ord == 2:
-            new_order = "insertionsort"
-        elif iterable_ord == 3:
-            new_order = "shellsort"
+            new_order = "mergesort"
         else:
             print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
 
