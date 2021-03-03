@@ -80,12 +80,12 @@ def sortVideos(catalog, size, iterable_ord):
         new_title = qs.sort(sub_list, cmpVideosByViews)
     elif iterable_ord == "mergesort":
         new_title = ms.sort(sub_list, cmpVideosByViews)
-    if iterable_ord == "selectionsort":
-        new_title = qs.sort(sub_list, cmpVideosByViews)
+    elif iterable_ord == "selectionsort":
+        new_title = ss.sort(sub_list, cmpVideosByViews)
     elif iterable_ord == "insertionsort":
-        new_title = ms.sort(sub_list, cmpVideosByViews)
-    if iterable_ord == "shellsort":
-        new_title = qs.sort(sub_list, cmpVideosByViews)
+        new_title = ins.sort(sub_list, cmpVideosByViews)
+    elif iterable_ord == "shellsort":
+        new_title = shs.sort(sub_list, cmpVideosByViews)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, new_title

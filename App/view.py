@@ -118,11 +118,11 @@ while True:
             new_order = "quicksort"
         elif iterable_ord == 2:
             new_order = "mergesort"
-        if iterable_ord == 3:
+        elif iterable_ord == 3:
             new_order = "selectionsort"
         elif iterable_ord == 4:
             new_order = "insertionsort"
-        if iterable_ord == 5:
+        elif iterable_ord == 5:
             new_order = "shellsort"
         else:
             print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
