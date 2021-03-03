@@ -103,7 +103,6 @@ while True:
             new_type == "LINKED_LIST"
         else:
             print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
-        print(new_type)
         catalog = initCatalog(new_type)
         loadData(catalog)
 
