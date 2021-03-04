@@ -82,7 +82,6 @@ def pregunta2():
     print("5- Shell Sort")
 
 
-
 catalog = None
 
 
@@ -92,7 +91,7 @@ Menu principal
 while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
-    if int(inputs[0]) == 1:
+    if int(inputs) == 1:
         pregunta1()
         tad = int(input())
         print("Cargando información de los archivos ....")
@@ -110,7 +109,7 @@ while True:
         else:
             print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
 
-    elif int(inputs[0]) == 2:
+    elif int(inputs) == 2:
         size = int(input("Indique el tamaño de la muestra: "))
         pregunta2()
         iterable_ord = int(input())
