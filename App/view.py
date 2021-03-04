@@ -99,14 +99,16 @@ while True:
         new_type = 0
         if tad == 1:
             new_type = "ARRAY_LIST"
+            catalog = initCatalog(new_type)
+            loadData(catalog)
+            print('Videos cargados: ' + str(lt.size(catalog['title'])))
         elif tad == 2:
             new_type == "LINKED_LIST"
+            catalog = initCatalog(new_type)
+            loadData(catalog)
+            print('Videos cargados: ' + str(lt.size(catalog['title'])))
         else:
             print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
-        catalog = initCatalog(new_type)
-        loadData(catalog)
-
-        print('Videos cargados: ' + str(lt.size(catalog['title'])))
 
     elif int(inputs[0]) == 2:
         size = int(input("Indique el tamaño de la muestra: "))
@@ -115,21 +117,36 @@ while True:
         new_order = 0
         if iterable_ord == 1:
             new_order = "quicksort"
+            result = controller.sortVideos(catalog, size, new_order)
+            printResults(result[1], size)
+            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                  str(result[0]))
         elif iterable_ord == 2:
             new_order = "mergesort"
+            result = controller.sortVideos(catalog, size, new_order)
+            printResults(result[1], size)
+            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                  str(result[0]))
         elif iterable_ord == 3:
             new_order = "selectionsort"
+            result = controller.sortVideos(catalog, size, new_order)
+            printResults(result[1], size)
+            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                  str(result[0]))
         elif iterable_ord == 4:
             new_order = "insertionsort"
+            result = controller.sortVideos(catalog, size, new_order)
+            printResults(result[1], size)
+            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                  str(result[0]))
         elif iterable_ord == 5:
             new_order = "shellsort"
+            result = controller.sortVideos(catalog, size, new_order)
+            printResults(result[1], size)
+            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                  str(result[0]))
         else:
             print("No hizo una selección válida, por favor intente nuevamente a continuacion:\n")
-
-        result = controller.sortVideos(catalog, size, new_order)
-        printResults(result[1], size)
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
-                                          str(result[0]))
 
     else:
         sys.exit(0)
